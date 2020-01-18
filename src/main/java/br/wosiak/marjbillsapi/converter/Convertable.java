@@ -1,6 +1,6 @@
 package br.wosiak.marjbillsapi.converter;
 
-public interface Convertable<TModel,TDto> {
-	TModel convertToModel(TDto dto);
-	TDto convertToDTO(TModel model);
+public interface Convertable<TMODEL,TDTO> {
+	TMODEL convertToModel(TDTO dto);
+	TDTO convertToDTO(TMODEL model);
 }

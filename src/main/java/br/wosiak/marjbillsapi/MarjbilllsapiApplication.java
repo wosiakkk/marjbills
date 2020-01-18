@@ -1,4 +1,4 @@
-package br.wosiak.marjbilllsapi;
+package br.wosiak.marjbillsapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,14 +1,18 @@
 package br.wosiak.marjbillsapi.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.wosiak.marjbillsapi.dto.UsuarioDTO;
 import br.wosiak.marjbillsapi.model.Usuario;
 
+@Component
 public class UsuarioConverter implements Convertable<Usuario, UsuarioDTO>{
 
 	@Override
 	public Usuario convertToModel(UsuarioDTO dto) {
 		Usuario model = new Usuario();
-		model.setId(Long.parseLong(dto.getId()));
+		if(dto.getId() != null)
+			model.setId(Long.parseLong(dto.getId()));
 		model.setNome(dto.getNome());
 		model.setEmail(dto.getEmail());
 		model.setSenha(dto.getSenha());
