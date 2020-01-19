@@ -424,6 +424,57 @@
 			],
 			"description": "Requisições do model Categoria",
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "3 - Gasto",
+			"item": [
+				{
+					"name": "3.1 Salvar Gasto",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4fde1ae0-edc8-43e0-8653-f63e8bc59c7d",
+								"exec": [
+									"var current_timestamp = new Date();",
+									"postman.setEnvironmentVariable(\"current_timestamp\", current_timestamp.toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Material de Limpeza Muffato\",\n\t\"valor\":\"80.73\",\n\t\"fixo\": false,\n\t\"data_criacao\":\"{{current_timestamp}}\",\n\t\"mes\":\"1\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}gasto",
+							"host": [
+								"{{uri_marjbills_api}}gasto"
+							]
+						},
+						"description": "Requisição para salvar um gasto."
+					},
+					"response": []
+				}
+			],
+			"description": "Requisições para testar os endpoints de Gasto",
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

@@ -1,14 +1,20 @@
 package br.wosiak.marjbillsapi.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity()
 @Table(name = "t_usuario")
@@ -28,6 +34,11 @@ public class Usuario implements Serializable{
 	private String email;
 	@Column(name = "senha")
 	private String senha;
+	@Column(name = "saldo")
+	private double saldo;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+	@JsonIgnore
+	private List<Gasto> gastos;
 	
 	public Long getId() {
 		return id;
@@ -52,6 +63,18 @@ public class Usuario implements Serializable{
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public double getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+	public List<Gasto> getGastos() {
+		return gastos;
+	}
+	public void setGastos(List<Gasto> gastos) {
+		this.gastos = gastos;
 	}
 	
 	@Override
