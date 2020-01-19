@@ -19,6 +19,14 @@
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {",
 									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idCreated = jsonData.id;",
+									"",
+									"pm.test(\"Redirect location is correct\", function () {",
+									"   pm.response.to.have.header(\"Location\");",
+									"   pm.response.to.be.header(\"Location\", \"http://localhost:8080/usuario/\"+idCreated);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -37,7 +45,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\":\"Teste2\",\n\t\"email\": \"teste2@gmail.com\",\n\t\"senha\":\"12345\"\n}",
+							"raw": "{\n\t\"nome\":\"Teste Location Test 2\",\n\t\"email\": \"teste2@gmail.com\",\n\t\"senha\":\"12345\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -45,14 +53,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/usuario",
-							"protocol": "http",
+							"raw": "{{uri_marjbills_api}}usuario",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuario"
+								"{{uri_marjbills_api}}usuario"
 							]
 						},
 						"description": "Reqisição de criação de Usuário no sistema"
@@ -79,14 +82,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/usuario",
-							"protocol": "http",
+							"raw": "{{uri_marjbills_api}}usuario",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuario"
+								"{{uri_marjbills_api}}usuario"
 							]
 						},
 						"description": "Requisição para listar todos os usuários"
