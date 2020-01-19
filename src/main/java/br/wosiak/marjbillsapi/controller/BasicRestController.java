@@ -39,13 +39,13 @@ public abstract class BasicRestController<TDTO, TID> {
 	@PostMapping
 	public ResponseEntity<TDTO> salvar(@RequestBody TDTO dto){
 		try {
-			return ResponseEntity.ok(this.getBasicService().salvar(dto));
+			return ResponseEntity.status(HttpStatus.CREATED).body(this.getBasicService().salvar(dto));
 		} catch (ServiceException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@PutMapping(value = "/{id}")
+	@PutMapping
 	public ResponseEntity<TDTO> atualizar(@RequestBody TDTO dto){
 		try {
 			return ResponseEntity.ok(this.getBasicService().salvar(dto));

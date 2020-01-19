@@ -7,10 +7,10 @@
 	},
 	"item": [
 		{
-			"name": "Usuário",
+			"name": "1 - Usuário",
 			"item": [
 				{
-					"name": "Criando Usuário",
+					"name": "1.1 Criando Usuário",
 					"event": [
 						{
 							"listen": "test",
@@ -27,7 +27,9 @@
 									"pm.test(\"Redirect location is correct\", function () {",
 									"   pm.response.to.have.header(\"Location\");",
 									"   pm.response.to.be.header(\"Location\", \"http://localhost:8080/usuario/\"+idCreated);",
-									"});"
+									"});",
+									"",
+									"postman.setEnvironmentVariable(\"idUserCreated\", idCreated);"
 								],
 								"type": "text/javascript"
 							}
@@ -45,7 +47,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\":\"Teste Location Test 2\",\n\t\"email\": \"teste2@gmail.com\",\n\t\"senha\":\"12345\"\n}",
+							"raw": "{\n\t\"nome\":\"Postman Test\",\n\t\"email\": \"postmantest@gmail.com\",\n\t\"senha\":\"12345\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -63,15 +65,47 @@
 					"response": []
 				},
 				{
-					"name": "Listar Usuários",
+					"name": "1.2 Buscar Usuário (ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "461f2f2a-6b79-46cf-ab7c-9afbc8d99391",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}usuario/{{idUserCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}usuario"
+							],
+							"path": [
+								"{{idUserCreated}}"
+							]
+						},
+						"description": "Requisição para buscar um usuário específico por seu ID"
+					},
+					"response": []
+				},
+				{
+					"name": "1.3 Listar Usuários",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"id": "bfcc608f-90a1-46e7-b738-2df2c144cebe",
 								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -92,42 +126,21 @@
 					"response": []
 				},
 				{
-					"name": "Buscar Usuário (ID)",
+					"name": "1.4 Atualizar Usuário",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "461f2f2a-6b79-46cf-ab7c-9afbc8d99391",
+								"id": "ac5708b6-3edc-4442-a37d-2816bbe0828a",
 								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/usuario/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuario",
-								"1"
-							]
-						},
-						"description": "Requisição para buscar um usuário específico por seu ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Atualizar Usuário",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -140,7 +153,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\":\"4\",\n\t\"nome\":\"Teste Update\",\n\t\"email\":\"testeupdate@gmail.com\",\n\t\"senha\":\"54321\"\n}",
+							"raw": "{\n\t\"id\":\"{{idUserCreated}}\",\n\t\"nome\":\"Postman Teste Update\",\n\t\"email\":\"postamanupdate@gmail.com\",\n\t\"senha\":\"54321\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -148,15 +161,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/usuario/4",
-							"protocol": "http",
+							"raw": "{{uri_marjbills_api}}usuario",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuario",
-								"4"
+								"{{uri_marjbills_api}}usuario"
 							]
 						},
 						"description": "Requisição para atualizar um usuário específico."
@@ -164,20 +171,31 @@
 					"response": []
 				},
 				{
-					"name": "Deletar um Usuário",
+					"name": "1.5 Deletar um Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb528159-9926-49a4-a3e5-dc11e324ecce",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/usuario/5",
-							"protocol": "http",
+							"raw": "{{uri_marjbills_api}}usuario/{{idUserCreated}}",
 							"host": [
-								"localhost"
+								"{{uri_marjbills_api}}usuario"
 							],
-							"port": "8080",
 							"path": [
-								"usuario",
-								"5"
+								"{{idUserCreated}}"
 							]
 						},
 						"description": "Requisição para deletar um usuário específico através do seu ID"
@@ -189,10 +207,30 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Categoria",
+			"name": "2 - Categoria",
 			"item": [
 				{
-					"name": "Criando Categoria",
+					"name": "2.1 Criando Categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c877e8d6-1913-486d-9c1f-2a74e0120823",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idCreated = jsonData.id;",
+									"",
+									"postman.setEnvironmentVariable(\"idCatCreated\", idCreated);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -205,7 +243,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"descricao\":\"Teste\"\n}",
+							"raw": "{\n\t\"descricao\":\"Postman Teste\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -213,14 +251,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/categoria",
-							"protocol": "http",
+							"raw": "{{uri_marjbills_api}}categoria",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"categoria"
+								"{{uri_marjbills_api}}categoria"
 							]
 						},
 						"description": "Requisição para salvar uma categoria"
@@ -228,7 +261,22 @@
 					"response": []
 				},
 				{
-					"name": "Buscar Categoria (ID)",
+					"name": "2.2 Buscar Categoria (ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e367297-1493-427b-b9f2-940647827e7c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -252,15 +300,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/categoria/1",
-							"protocol": "http",
+							"raw": "{{uri_marjbills_api}}categoria/{{idCatCreated}}",
 							"host": [
-								"localhost"
+								"{{uri_marjbills_api}}categoria"
 							],
-							"port": "8080",
 							"path": [
-								"categoria",
-								"1"
+								"{{idCatCreated}}"
 							]
 						},
 						"description": "REquisição para buscar uma categoria específica"
@@ -268,19 +313,30 @@
 					"response": []
 				},
 				{
-					"name": "Listar Categorias",
+					"name": "2.3 Listar Categorias",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5ffeba51-481b-41e2-bcc6-312f5e1b0018",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/categoria/",
-							"protocol": "http",
+							"raw": "{{uri_marjbills_api}}categoria/",
 							"host": [
-								"localhost"
+								"{{uri_marjbills_api}}categoria"
 							],
-							"port": "8080",
 							"path": [
-								"categoria",
 								""
 							]
 						},
@@ -289,7 +345,21 @@
 					"response": []
 				},
 				{
-					"name": "Atualizar Categoria",
+					"name": "2.4 Atualizar Categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ca83648c-6f3e-4242-a37c-c0061c20e70b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -302,7 +372,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\":\"2\",\n\t\"descricao\":\"Material de Limpeza\"\n}",
+							"raw": "{\n\t\"id\":\"{{idCatCreated}}\",\n\t\"descricao\":\"Postman Teste Update\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -310,15 +380,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/categoria/2",
-							"protocol": "http",
+							"raw": "{{uri_marjbills_api}}categoria",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"categoria",
-								"2"
+								"{{uri_marjbills_api}}categoria"
 							]
 						},
 						"description": "Requisição para atualizar uma categoria específica"
@@ -326,20 +390,31 @@
 					"response": []
 				},
 				{
-					"name": "Deletar uma Categoria",
+					"name": "2.5 Deletar uma Categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd690b3f-0018-4b2d-a24d-acc89fd9894c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/categoria/3",
-							"protocol": "http",
+							"raw": "{{uri_marjbills_api}}categoria/{{idCatCreated}}",
 							"host": [
-								"localhost"
+								"{{uri_marjbills_api}}categoria"
 							],
-							"port": "8080",
 							"path": [
-								"categoria",
-								"3"
+								"{{idCatCreated}}"
 							]
 						},
 						"description": "Requisição para deletar uma categoria específica."
