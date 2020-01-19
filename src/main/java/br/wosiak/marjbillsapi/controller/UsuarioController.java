@@ -19,7 +19,5 @@ public class UsuarioController extends BasicRestController<UsuarioDTO, Long>{
 	protected BasicService<UsuarioDTO, Long> getBasicService() {
 		return this.usuarioService;
 	}
-
-	
 	
 }
