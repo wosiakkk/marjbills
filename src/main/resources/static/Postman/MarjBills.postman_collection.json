@@ -436,8 +436,20 @@
 							"script": {
 								"id": "4fde1ae0-edc8-43e0-8653-f63e8bc59c7d",
 								"exec": [
-									"var current_timestamp = new Date();",
-									"postman.setEnvironmentVariable(\"current_timestamp\", current_timestamp.toISOString());"
+									"const dateNow= new Date();",
+									"pm.environment.set('currentDate', dateNow.toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "9e232b4c-97ae-4ee8-a1e2-47b440f07095",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -455,7 +467,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Material de Limpeza Muffato\",\n\t\"valor\":\"80.73\",\n\t\"fixo\": false,\n\t\"data_criacao\":\"{{current_timestamp}}\",\n\t\"mes\":\"1\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"}\n}",
+							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Material de Limpeza Extra2\",\n\t\"valor\":\"55.88\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":\"1\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
