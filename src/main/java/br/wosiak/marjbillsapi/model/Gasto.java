@@ -13,8 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "t_gasto")
@@ -29,6 +29,7 @@ public class Gasto extends Dinheiro {
 	@Column(name = "fixo")
 	private boolean fixo;
 	@Column(name = "data_criacao")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date dataCriacao;
 	@Column(name = "mes")
 	private int mes;
