@@ -35,11 +35,11 @@ public class Gasto extends Dinheiro {
 	private int mes;
 	@Column(name = "ano")
 	private int ano;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "categoria_id", nullable = false)
 	@JsonIgnore
 	private Categoria categoria;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuario_id", nullable = false)
 	@JsonIgnore
 	private Usuario usuario;

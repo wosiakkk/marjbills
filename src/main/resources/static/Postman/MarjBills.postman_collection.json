@@ -29,7 +29,26 @@
 									"   pm.response.to.be.header(\"Location\", \"http://localhost:8080/usuario/\"+idCreated);",
 									"});",
 									"",
-									"postman.setEnvironmentVariable(\"idUserCreated\", idCreated);"
+									"postman.setEnvironmentVariable(\"idUserCreated\", idCreated);",
+									"",
+									"pm.test(\"Verificando nome Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eql(\"Postman Test\");",
+									"});",
+									"",
+									"pm.test(\"Verificando email Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"postmantest@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando senha Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.senha).to.eql(\"12345\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -74,6 +93,25 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando nome Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eql(\"Postman Test\");",
+									"});",
+									"",
+									"pm.test(\"Verificando email Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"postmantest@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando senha Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.senha).to.eql(\"12345\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -106,6 +144,14 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"A resposta é um array array\", function () {",
+									"        pm.expect(pm.response.json()).to.be.an('array');",
 									"});"
 								],
 								"type": "text/javascript"
@@ -135,6 +181,25 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando update nome Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eql(\"Postman Teste Update\");",
+									"});",
+									"",
+									"pm.test(\"Verificando update email Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"postamanupdate@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando update senha Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.senha).to.eql(\"54321\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -180,7 +245,12 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
-									"});"
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -225,7 +295,15 @@
 									"var idCreated = jsonData.id;",
 									"",
 									"postman.setEnvironmentVariable(\"idCatCreated\", idCreated);",
-									""
+									"",
+									"pm.test(\"Verificando nome Categoria\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Postman Teste\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -271,7 +349,15 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
-									""
+									"",
+									"pm.test(\"Verificando nome Categoria\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Postman Teste\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -322,6 +408,14 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"A resposta é um array array\", function () {",
+									"        pm.expect(pm.response.json()).to.be.an('array');",
 									"});"
 								],
 								"type": "text/javascript"
@@ -354,6 +448,15 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando nome Categoria\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Postman Teste Update\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -399,6 +502,10 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -429,7 +536,7 @@
 			"name": "3 - Gasto",
 			"item": [
 				{
-					"name": "3.1 Salvar Gasto",
+					"name": "3.1 Criando Gasto",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -449,6 +556,76 @@
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {",
 									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idGastCreated = jsonData.id;",
+									"",
+									"postman.setEnvironmentVariable(\"idGastCreated\", idGastCreated);",
+									"",
+									"pm.test(\"Verificando descrição Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Compra Test Postman\");",
+									"});",
+									"",
+									"pm.test(\"Verificando valor Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.valor).to.eql(55.88);",
+									"});",
+									"",
+									"pm.test(\"Verificando fixo Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.fixo).to.eql(false);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando mês Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.mes).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Verificando ano Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.ano).to.eql(2020);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria id Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.id).to.eql(2);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria desc Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.descricao).to.eql(\"Material de Limpeza\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario id Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario nome Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.nome).to.eql(\"Bruno Wosiak\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario email Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.email).to.eql(\"brunofwosiak@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario senha Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.senha).to.eql(\"12345\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario saldo Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.saldo).to.eql(0.0);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -467,7 +644,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Material de Limpeza Extra2\",\n\t\"valor\":\"55.88\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":\"1\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"}\n}",
+							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Test Postman\",\n\t\"valor\":\"55.88\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":\"1\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -481,6 +658,292 @@
 							]
 						},
 						"description": "Requisição para salvar um gasto."
+					},
+					"response": []
+				},
+				{
+					"name": "3.2 Buscar Gasto (ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f992589a-03bc-40c8-bf0d-6e53b8e2398a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando descrição Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Compra Test Postman\");",
+									"});",
+									"",
+									"pm.test(\"Verificando valor Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.valor).to.eql(55.88);",
+									"});",
+									"",
+									"pm.test(\"Verificando fixo Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.fixo).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Verificando mês Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.mes).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Verificando ano Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.ano).to.eql(2020);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria id Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.id).to.eql(2);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria desc Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.descricao).to.eql(\"Material de Limpeza\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario id Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario nome Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.nome).to.eql(\"Bruno Wosiak\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario email Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.email).to.eql(\"brunofwosiak@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario senha Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.senha).to.eql(\"12345\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario saldo Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.saldo).to.eql(0.0);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}gasto/{{idGastCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}gasto"
+							],
+							"path": [
+								"{{idGastCreated}}"
+							]
+						},
+						"description": "Requisição para buscar um Gasto específico por Id."
+					},
+					"response": []
+				},
+				{
+					"name": "3.3 Listar Gastos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "28404fe1-fe93-465f-b77c-7ddabc0178fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"A resposta é um array array\", function () {",
+									"        pm.expect(pm.response.json()).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}gasto/",
+							"host": [
+								"{{uri_marjbills_api}}gasto"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Requisição para listar todos os Gastos"
+					},
+					"response": []
+				},
+				{
+					"name": "3.4 Atualizar Gasto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6f534ae-7569-4e4f-b21f-5bda8473bb35",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idGastCreated = jsonData.id;",
+									"",
+									"postman.setEnvironmentVariable(\"idGastCreated\", idGastCreated);",
+									"",
+									"pm.test(\"Verificando descrição Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Compra Test Postman Update\");",
+									"});",
+									"",
+									"pm.test(\"Verificando valor Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.valor).to.eql(88.00);",
+									"});",
+									"",
+									"pm.test(\"Verificando fixo Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.fixo).to.eql(false);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando mês Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.mes).to.eql(2);",
+									"});",
+									"",
+									"pm.test(\"Verificando ano Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.ano).to.eql(2020);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria id Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria desc Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.descricao).to.eql(\"Moradia\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario id Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(2);",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario nome Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.nome).to.eql(\"Marjorie Bozzi Rossi\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario email Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.email).to.eql(\"marjoriebozzi@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario senha Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.senha).to.eql(\"12345\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario saldo Gasto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.saldo).to.eql(0.0);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"{{idGastCreated}}\",\n\t\"descricao\":\"Compra Test Postman Update\",\n\t\"valor\":\"88.00\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":\"2\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"1\"},\n\t\"usuario\": {\"id\":\"2\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}gasto",
+							"host": [
+								"{{uri_marjbills_api}}gasto"
+							]
+						},
+						"description": "Requisição para atualizar um Gasto"
+					},
+					"response": []
+				},
+				{
+					"name": "3.5 Deletar um Gasto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "24653b48-cd4f-41a7-b881-78b2aba38360",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}gasto/{{idGastCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}gasto"
+							],
+							"path": [
+								"{{idGastCreated}}"
+							]
+						},
+						"description": "Requisição para deletar um Gasto"
 					},
 					"response": []
 				}
