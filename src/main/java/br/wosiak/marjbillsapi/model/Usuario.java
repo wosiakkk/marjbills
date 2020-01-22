@@ -39,6 +39,9 @@ public class Usuario implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	@JsonIgnore
 	private List<Gasto> gastos;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+	@JsonIgnore
+	private List<Objetivo> objetivos;
 	
 	public Long getId() {
 		return id;
@@ -75,6 +78,12 @@ public class Usuario implements Serializable{
 	}
 	public void setGastos(List<Gasto> gastos) {
 		this.gastos = gastos;
+	}
+	public void setObjetivos(List<Objetivo> objetivos) {
+		this.objetivos = objetivos;
+	}
+	public List<Objetivo> getObjetivos() {
+		return objetivos;
 	}
 	
 	@Override
