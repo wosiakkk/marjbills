@@ -38,7 +38,7 @@ public class Usuario implements Serializable{
 	private double saldo;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	@JsonIgnore
-	private List<Gasto> gastos;
+	private List<Movimentacao> gastos;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	@JsonIgnore
 	private List<Objetivo> objetivos;
@@ -73,10 +73,10 @@ public class Usuario implements Serializable{
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
-	public List<Gasto> getGastos() {
+	public List<Movimentacao> getGastos() {
 		return gastos;
 	}
-	public void setGastos(List<Gasto> gastos) {
+	public void setGastos(List<Movimentacao> gastos) {
 		this.gastos = gastos;
 	}
 	public void setObjetivos(List<Objetivo> objetivos) {

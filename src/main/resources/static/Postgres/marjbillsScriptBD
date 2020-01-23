@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5.20
 -- Dumped by pg_dump version 9.5.20
 
--- Started on 2020-01-22 21:35:15 -03
+-- Started on 2020-01-22 22:37:28 -03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -23,25 +23,25 @@ SET row_security = off;
 -- Name: seq_categoria; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.seq_categoria', 10, true);
+SELECT pg_catalog.setval('public.seq_categoria', 12, true);
 
 
 --
 -- TOC entry 2194 (class 0 OID 0)
--- Dependencies: 186
--- Name: seq_gasto; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Dependencies: 187
+-- Name: seq_movimentacao; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.seq_gasto', 33, true);
+SELECT pg_catalog.setval('public.seq_movimentacao', 3, true);
 
 
 --
 -- TOC entry 2195 (class 0 OID 0)
--- Dependencies: 188
+-- Dependencies: 186
 -- Name: seq_objetivo; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.seq_objetivo', 18, true);
+SELECT pg_catalog.setval('public.seq_objetivo', 20, true);
 
 
 --
@@ -50,7 +50,7 @@ SELECT pg_catalog.setval('public.seq_objetivo', 18, true);
 -- Name: seq_usuario; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.seq_usuario', 21, true);
+SELECT pg_catalog.setval('public.seq_usuario', 23, true);
 
 
 --
@@ -64,28 +64,16 @@ INSERT INTO public.t_categoria (id, descricao) VALUES (2, 'Material de Limpeza')
 
 
 --
--- TOC entry 2180 (class 0 OID 16520)
+-- TOC entry 2183 (class 0 OID 16560)
+-- Dependencies: 188
+-- Data for Name: t_movimentacao; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2180 (class 0 OID 16541)
 -- Dependencies: 185
--- Data for Name: t_gasto; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (18, 'Aluguel KitNet', 850.5, true, NULL, 1, 2020, 1, 1);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (19, 'Compra Material de Limpeza Muffato', 80.730000000000004, false, NULL, 1, 2020, 2, 1);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (20, 'Compra Material de Limpeza Muffato', 85.730000000000004, false, NULL, 1, 2020, 2, 1);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (21, 'Compra Material de Limpeza Extra', 55.6799999999999997, false, NULL, 1, 2020, 2, 1);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (22, 'Compra Material de Limpeza Extra', 55.6799999999999997, false, NULL, 1, 2020, 2, 1);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (23, 'Compra Material de Limpeza Extra2', 55.8800000000000026, false, '2020-01-21', 1, 2020, 2, 1);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (24, 'Compra Test Postman', 55.8800000000000026, false, '2020-01-21', 1, 2020, 2, 1);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (25, 'Compra Test Postman', 55.8800000000000026, false, '2020-01-21', 1, 2020, 2, 1);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (26, 'Compra Test Postman', 55.8800000000000026, false, '2020-01-21', 1, 2020, 2, 1);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (28, 'Compra Test Postman', 55.8800000000000026, false, '2020-01-21', 1, 2020, 2, 1);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (27, 'Compra Test Postman Update', 88, false, '2020-01-21', 2, 2020, 1, 2);
-INSERT INTO public.t_gasto (id, descricao, valor, fixo, data_criacao, mes, ano, categoria_id, usuario_id) VALUES (32, 'Compra Test Postman', 55.8800000000000026, false, '2020-01-22', 1, 2020, 2, 1);
-
-
---
--- TOC entry 2182 (class 0 OID 16541)
--- Dependencies: 187
 -- Data for Name: t_objetivo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -113,7 +101,7 @@ INSERT INTO public.t_usuario (id, nome, email, senha, saldo) VALUES (9, 'Teste L
 INSERT INTO public.t_usuario (id, nome, email, senha, saldo) VALUES (10, 'Teste Location Test 2', 'teste2@gmail.com', '12345', 0);
 
 
--- Completed on 2020-01-22 21:35:15 -03
+-- Completed on 2020-01-22 22:37:28 -03
 
 --
 -- PostgreSQL database dump complete

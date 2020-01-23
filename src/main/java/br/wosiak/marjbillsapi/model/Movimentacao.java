@@ -17,17 +17,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "t_gasto")
-public class Gasto extends Dinheiro {
+@Table(name = "t_movimentacao")
+public class Movimentacao extends Dinheiro {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name = "seq_gasto", sequenceName = "seq_gasto" ,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gasto")
+	@SequenceGenerator(name = "seq_movimentacao", sequenceName = "seq_movimentacao" ,allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_movimentacao")
 	private Long id;
-	@Column(name = "fixo")
-	private boolean fixo;
 	@Column(name = "data_criacao")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date dataCriacao;
@@ -43,18 +41,14 @@ public class Gasto extends Dinheiro {
 	@JoinColumn(name = "usuario_id", nullable = false)
 	@JsonIgnore
 	private Usuario usuario;
+	@Column(name = "positiva")
+	private boolean positiva;
 	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public boolean isFixo() {
-		return fixo;
-	}
-	public void setFixo(boolean fixo) {
-		this.fixo = fixo;
 	}
 	public Date getDataCriacao() {
 		return dataCriacao;
@@ -86,6 +80,12 @@ public class Gasto extends Dinheiro {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	public void setPositiva(boolean positiva) {
+		this.positiva = positiva;
+	}
+	public boolean isPositiva() {
+		return positiva;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -102,7 +102,7 @@ public class Gasto extends Dinheiro {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Gasto other = (Gasto) obj;
+		Movimentacao other = (Movimentacao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

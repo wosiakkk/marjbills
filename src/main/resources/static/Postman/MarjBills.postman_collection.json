@@ -533,10 +533,10 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "3 - Gasto",
+			"name": "3 - Movimentação",
 			"item": [
 				{
-					"name": "3.1 Criando Gasto",
+					"name": "3.1 Criando Movimentação",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -563,65 +563,70 @@
 									"",
 									"postman.setEnvironmentVariable(\"idGastCreated\", idGastCreated);",
 									"",
-									"pm.test(\"Verificando descrição Gasto\", function () {",
+									"pm.test(\"Verificando descrição Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.descricao).to.eql(\"Compra Test Postman\");",
 									"});",
 									"",
-									"pm.test(\"Verificando valor Gasto\", function () {",
+									"pm.test(\"Verificando valor Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.valor).to.eql(55.88);",
 									"});",
 									"",
-									"pm.test(\"Verificando fixo Gasto\", function () {",
+									"pm.test(\"Verificando fixo Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.fixo).to.eql(false);",
 									"});",
 									"",
 									"",
-									"pm.test(\"Verificando mês Gasto\", function () {",
+									"pm.test(\"Verificando mês Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.mes).to.eql(1);",
 									"});",
 									"",
-									"pm.test(\"Verificando ano Gasto\", function () {",
+									"pm.test(\"Verificando ano Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.ano).to.eql(2020);",
 									"});",
 									"",
-									"pm.test(\"Verificando categoria id Gasto\", function () {",
+									"pm.test(\"Verificando categoria id Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.categoria.id).to.eql(2);",
 									"});",
 									"",
-									"pm.test(\"Verificando categoria desc Gasto\", function () {",
+									"pm.test(\"Verificando categoria desc Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.categoria.descricao).to.eql(\"Material de Limpeza\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario id Gasto\", function () {",
+									"pm.test(\"Verificando usuario id Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.id).to.eql(1);",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario nome Gasto\", function () {",
+									"pm.test(\"Verificando usuario nome Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.nome).to.eql(\"Bruno Wosiak\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario email Gasto\", function () {",
+									"pm.test(\"Verificando usuario email Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.email).to.eql(\"brunofwosiak@gmail.com\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario senha Gasto\", function () {",
+									"pm.test(\"Verificando usuario senha Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.senha).to.eql(\"12345\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario saldo Gasto\", function () {",
+									"pm.test(\"Verificando usuario saldo Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.saldo).to.eql(0.0);",
+									"});",
+									"",
+									"pm.test(\"Verificando positiva Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.positiva).to.eql(false);",
 									"});",
 									"",
 									"pm.test(\"Response time is less than 200ms\", function () {",
@@ -638,13 +643,13 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Test Postman\",\n\t\"valor\":\"55.88\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":\"1\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"}\n}",
+							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Test Postman\",\n\t\"valor\":\"55.88\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":\"1\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"},\n\t\"positiva\":false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -652,9 +657,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{uri_marjbills_api}}gasto",
+							"raw": "{{uri_marjbills_api}}movimentacao",
 							"host": [
-								"{{uri_marjbills_api}}gasto"
+								"{{uri_marjbills_api}}movimentacao"
 							]
 						},
 						"description": "Requisição para salvar um gasto."
@@ -662,7 +667,7 @@
 					"response": []
 				},
 				{
-					"name": "3.2 Buscar Gasto (ID)",
+					"name": "3.2 Buscar Movimentação (ID)",
 					"event": [
 						{
 							"listen": "test",
@@ -673,64 +678,69 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"Verificando descrição Gasto\", function () {",
+									"pm.test(\"Verificando descrição Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.descricao).to.eql(\"Compra Test Postman\");",
 									"});",
 									"",
-									"pm.test(\"Verificando valor Gasto\", function () {",
+									"pm.test(\"Verificando valor Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.valor).to.eql(55.88);",
 									"});",
 									"",
-									"pm.test(\"Verificando fixo Gasto\", function () {",
+									"pm.test(\"Verificando fixo Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.fixo).to.eql(false);",
 									"});",
 									"",
-									"pm.test(\"Verificando mês Gasto\", function () {",
+									"pm.test(\"Verificando mês Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.mes).to.eql(1);",
 									"});",
 									"",
-									"pm.test(\"Verificando ano Gasto\", function () {",
+									"pm.test(\"Verificando ano Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.ano).to.eql(2020);",
 									"});",
 									"",
-									"pm.test(\"Verificando categoria id Gasto\", function () {",
+									"pm.test(\"Verificando categoria id Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.categoria.id).to.eql(2);",
 									"});",
 									"",
-									"pm.test(\"Verificando categoria desc Gasto\", function () {",
+									"pm.test(\"Verificando categoria desc Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.categoria.descricao).to.eql(\"Material de Limpeza\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario id Gasto\", function () {",
+									"pm.test(\"Verificando usuario id Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.id).to.eql(1);",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario nome Gasto\", function () {",
+									"pm.test(\"Verificando usuario nome Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.nome).to.eql(\"Bruno Wosiak\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario email Gasto\", function () {",
+									"pm.test(\"Verificando usuario email Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.email).to.eql(\"brunofwosiak@gmail.com\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario senha Gasto\", function () {",
+									"pm.test(\"Verificando usuario senha Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.senha).to.eql(\"12345\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario saldo Gasto\", function () {",
+									"pm.test(\"Verificando usuario saldo Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.saldo).to.eql(0.0);",
+									"});",
+									"",
+									"pm.test(\"Verificando positiva Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.positiva).to.eql(false);",
 									"});",
 									"",
 									"pm.test(\"Response time is less than 200ms\", function () {",
@@ -745,20 +755,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{uri_marjbills_api}}gasto/{{idGastCreated}}",
+							"raw": "{{uri_marjbills_api}}movimentacao/{{idGastCreated}}",
 							"host": [
-								"{{uri_marjbills_api}}gasto"
+								"{{uri_marjbills_api}}movimentacao"
 							],
 							"path": [
 								"{{idGastCreated}}"
 							]
 						},
-						"description": "Requisição para buscar um Gasto específico por Id."
+						"description": "Requisição para buscar uma Movimentação específica por Id."
 					},
 					"response": []
 				},
 				{
-					"name": "3.3 Listar Gastos",
+					"name": "3.3 Listar Movimentações",
 					"event": [
 						{
 							"listen": "test",
@@ -785,20 +795,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{uri_marjbills_api}}gasto/",
+							"raw": "{{uri_marjbills_api}}movimentacao/",
 							"host": [
-								"{{uri_marjbills_api}}gasto"
+								"{{uri_marjbills_api}}movimentacao"
 							],
 							"path": [
 								""
 							]
 						},
-						"description": "Requisição para listar todos os Gastos"
+						"description": "Requisição para listar todas as Movimentações"
 					},
 					"response": []
 				},
 				{
-					"name": "3.4 Atualizar Gasto",
+					"name": "3.4 Atualizar Movimentacao",
 					"event": [
 						{
 							"listen": "test",
@@ -814,65 +824,70 @@
 									"",
 									"postman.setEnvironmentVariable(\"idGastCreated\", idGastCreated);",
 									"",
-									"pm.test(\"Verificando descrição Gasto\", function () {",
+									"pm.test(\"Verificando descrição Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.descricao).to.eql(\"Compra Test Postman Update\");",
 									"});",
 									"",
-									"pm.test(\"Verificando valor Gasto\", function () {",
+									"pm.test(\"Verificando valor Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.valor).to.eql(88.00);",
 									"});",
 									"",
-									"pm.test(\"Verificando fixo Gasto\", function () {",
+									"pm.test(\"Verificando fixo Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.fixo).to.eql(false);",
 									"});",
 									"",
 									"",
-									"pm.test(\"Verificando mês Gasto\", function () {",
+									"pm.test(\"Verificando mês Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.mes).to.eql(2);",
 									"});",
 									"",
-									"pm.test(\"Verificando ano Gasto\", function () {",
+									"pm.test(\"Verificando ano Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.ano).to.eql(2020);",
 									"});",
 									"",
-									"pm.test(\"Verificando categoria id Gasto\", function () {",
+									"pm.test(\"Verificando categoria id Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.categoria.id).to.eql(1);",
 									"});",
 									"",
-									"pm.test(\"Verificando categoria desc Gasto\", function () {",
+									"pm.test(\"Verificando categoria desc Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.categoria.descricao).to.eql(\"Moradia\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario id Gasto\", function () {",
+									"pm.test(\"Verificando usuario id Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.id).to.eql(2);",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario nome Gasto\", function () {",
+									"pm.test(\"Verificando usuario nome Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.nome).to.eql(\"Marjorie Bozzi Rossi\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario email Gasto\", function () {",
+									"pm.test(\"Verificando usuario email Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.email).to.eql(\"marjoriebozzi@gmail.com\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario senha Gasto\", function () {",
+									"pm.test(\"Verificando usuario senha Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.senha).to.eql(\"12345\");",
 									"});",
 									"",
-									"pm.test(\"Verificando usuario saldo Gasto\", function () {",
+									"pm.test(\"Verificando usuario saldo Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.usuario.saldo).to.eql(0.0);",
+									"});",
+									"",
+									"pm.test(\"Verificando positiva Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.positiva).to.eql(true);",
 									"});",
 									"",
 									"pm.test(\"Response time is less than 200ms\", function () {",
@@ -895,7 +910,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\":\"{{idGastCreated}}\",\n\t\"descricao\":\"Compra Test Postman Update\",\n\t\"valor\":\"88.00\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":\"2\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"1\"},\n\t\"usuario\": {\"id\":\"2\"}\n}",
+							"raw": "{\n\t\"id\":\"{{idGastCreated}}\",\n\t\"descricao\":\"Compra Test Postman Update\",\n\t\"valor\":\"88.00\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":\"2\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"1\"},\n\t\"usuario\": {\"id\":\"2\"},\n\t\"positiva\":true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -903,17 +918,17 @@
 							}
 						},
 						"url": {
-							"raw": "{{uri_marjbills_api}}gasto",
+							"raw": "{{uri_marjbills_api}}movimentacao",
 							"host": [
-								"{{uri_marjbills_api}}gasto"
+								"{{uri_marjbills_api}}movimentacao"
 							]
 						},
-						"description": "Requisição para atualizar um Gasto"
+						"description": "Requisição para atualizar uma Moviemntacao"
 					},
 					"response": []
 				},
 				{
-					"name": "3.5 Deletar um Gasto",
+					"name": "3.5 Deletar uma Movimentação",
 					"event": [
 						{
 							"listen": "test",
@@ -935,9 +950,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{uri_marjbills_api}}gasto/{{idGastCreated}}",
+							"raw": "{{uri_marjbills_api}}movimentacao/{{idGastCreated}}",
 							"host": [
-								"{{uri_marjbills_api}}gasto"
+								"{{uri_marjbills_api}}movimentacao"
 							],
 							"path": [
 								"{{idGastCreated}}"

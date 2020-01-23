@@ -2,15 +2,15 @@ package br.wosiak.marjbillsapi.converter;
 
 import org.springframework.stereotype.Component;
 
-import br.wosiak.marjbillsapi.dto.GastoDTO;
-import br.wosiak.marjbillsapi.model.Gasto;
+import br.wosiak.marjbillsapi.dto.MovimentacaoDTO;
+import br.wosiak.marjbillsapi.model.Movimentacao;
 
 @Component
-public class GastoConverter implements Convertable<Gasto, GastoDTO>{
+public class MovimentacaoConverter implements Convertable<Movimentacao, MovimentacaoDTO>{
 
 	@Override
-	public Gasto convertToModel(GastoDTO dto) {
-		Gasto model = new Gasto();
+	public Movimentacao convertToModel(MovimentacaoDTO dto) {
+		Movimentacao model = new Movimentacao();
 		model.setId(dto.getId());
 		model.setDescricao(dto.getDescricao());
 		model.setValor(dto.getValor());
@@ -19,13 +19,14 @@ public class GastoConverter implements Convertable<Gasto, GastoDTO>{
 		model.setMes(dto.getMes());
 		model.setAno(dto.getAno());
 		model.setCategoria(dto.getCategoria());
-		model.setUsuario(dto.getUsuario());		
+		model.setUsuario(dto.getUsuario());
+		model.setPositiva(dto.isPositiva());
 		return model;
 	}
 
 	@Override
-	public GastoDTO convertToDTO(Gasto model) {
-		GastoDTO dto = new GastoDTO();
+	public MovimentacaoDTO convertToDTO(Movimentacao model) {
+		MovimentacaoDTO dto = new MovimentacaoDTO();
 		dto.setId(model.getId());
 		dto.setDescricao(model.getDescricao());
 		dto.setValor(model.getValor());
@@ -35,6 +36,7 @@ public class GastoConverter implements Convertable<Gasto, GastoDTO>{
 		dto.setAno(model.getAno());
 		dto.setCategoria(model.getCategoria());
 		dto.setUsuario(model.getUsuario());
+		dto.setPositiva(model.isPositiva());
 		return dto;
 	}
 	
