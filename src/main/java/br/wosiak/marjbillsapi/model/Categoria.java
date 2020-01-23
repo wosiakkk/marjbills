@@ -30,7 +30,7 @@ public class Categoria implements Serializable{
 	private String descricao;
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "categoria")
 	@JsonIgnore
-	private List<Gasto> gastos;
+	private List<Movimentacao> gastos;
 	
 	public Long getId() {
 		return id;
@@ -46,10 +46,10 @@ public class Categoria implements Serializable{
 	}
 	
 	
-	public List<Gasto> getGastos() {
+	public List<Movimentacao> getGastos() {
 		return gastos;
 	}
-	public void setGastos(List<Gasto> gastos) {
+	public void setGastos(List<Movimentacao> gastos) {
 		this.gastos = gastos;
 	}
 	@Override

@@ -5,7 +5,7 @@ import java.util.Date;
 import br.wosiak.marjbillsapi.model.Categoria;
 import br.wosiak.marjbillsapi.model.Usuario;
 
-public class GastoDTO {
+public class MovimentacaoDTO {
 	
 	private Long id;
 	private String descricao;
@@ -16,6 +16,7 @@ public class GastoDTO {
 	private int ano;
 	private Categoria categoria;
 	private Usuario usuario;
+	private boolean positiva;
 	
 	public Long getId() {
 		return id;
@@ -70,6 +71,12 @@ public class GastoDTO {
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	public void setPositiva(boolean positiva) {
+		this.positiva = positiva;
+	}
+	public boolean isPositiva() {
+		return positiva;
 	}
 	
 }

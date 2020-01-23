@@ -14,6 +14,9 @@ public abstract class Dinheiro implements Serializable {
 	protected String descricao;
 	@Column(name = "valor")
 	protected double valor;
+	@Column(name = "fixo")
+	private boolean fixo;
+	
 	
 	public String getDescricao() {
 		return descricao;
@@ -26,6 +29,12 @@ public abstract class Dinheiro implements Serializable {
 	}
 	public void setValor(double valor) {
 		this.valor = valor;
+	}
+	public boolean isFixo() {
+		return fixo;
+	}
+	public void setFixo(boolean fixo) {
+		this.fixo = fixo;
 	}
 	@Override
 	public int hashCode() {
