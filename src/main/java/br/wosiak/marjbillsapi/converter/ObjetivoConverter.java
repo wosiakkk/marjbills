@@ -17,6 +17,7 @@ public class ObjetivoConverter implements Convertable<Objetivo, ObjetivoDTO>{
 		model.setSucesso(dto.isSucesso());
 		model.setDataInicio(dto.getDataInicio());
 		model.setDataFim(dto.getDataFim());
+		model.setUsuario(dto.getUsuario());
 		return model;
 	}
 
@@ -29,6 +30,7 @@ public class ObjetivoConverter implements Convertable<Objetivo, ObjetivoDTO>{
 		dto.setSucesso(model.isSucesso());
 		dto.setDataInicio(model.getDataInicio());
 		dto.setDataFim(model.getDataFim());
+		dto.setUsuario(model.getUsuario());
 		return dto;
 	}
 

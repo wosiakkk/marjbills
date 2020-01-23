@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -33,8 +34,12 @@ public class Objetivo implements Serializable{
 	@Column(name = "sucesso")
 	private boolean sucesso;
 	@Column(name = "data_inicio")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, 
+		pattern = "yyyy-MM-dd", locale = "pt-BR", timezone = "Brazil/East")
 	private Date dataInicio;
 	@Column(name = "data_fim")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, 
+		pattern = "yyyy-MM-dd", locale = "pt-BR", timezone = "Brazil/East")
 	private Date dataFim;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuario_id", nullable = false)
