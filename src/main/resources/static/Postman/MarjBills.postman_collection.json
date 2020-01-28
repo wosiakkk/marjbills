@@ -649,7 +649,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Test Postman\",\n\t\"valor\":\"55.88\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":\"1\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"},\n\t\"positiva\":false\n}",
+							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Test Postman\",\n\t\"valor\":\"55.88\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":{\"id\":\"1\"},\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"},\n\t\"positiva\":false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1281,6 +1281,132 @@
 					"response": []
 				}
 			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "5 - Mês",
+			"item": [
+				{
+					"name": "5.1 Criando Mês",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"\",\n\t\"data\":\"{{currentDate}}\",\n\t\"usuario\":{\"id\":\"1\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}mes",
+							"host": [
+								"{{uri_marjbills_api}}mes"
+							]
+						},
+						"description": "Requisição para criar um Mês"
+					},
+					"response": []
+				},
+				{
+					"name": "5.2 Buscar Mês (ID)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}mes/1",
+							"host": [
+								"{{uri_marjbills_api}}mes"
+							],
+							"path": [
+								"1"
+							]
+						},
+						"description": "Requisição para buscar um mês específico"
+					},
+					"response": []
+				},
+				{
+					"name": "5.3 Listar Meses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}mes/",
+							"host": [
+								"{{uri_marjbills_api}}mes"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Requisição para buscar todos os meses."
+					},
+					"response": []
+				},
+				{
+					"name": "5.4 Atualizar Mês",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"1\",\n\t\"data\":\"{{currentDate}}\",\n\t\"usuario\":{\"id\":\"1\"},\n\t\"movimentacoes\": [\n\t\t{\"id\":\"5\"}\n\t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}mes/",
+							"host": [
+								"{{uri_marjbills_api}}mes"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Requisição para atualizar Mês"
+					},
+					"response": []
+				},
+				{
+					"name": "5.5 Deletar um Mês",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}mes/1",
+							"host": [
+								"{{uri_marjbills_api}}mes"
+							],
+							"path": [
+								"1"
+							]
+						},
+						"description": "Requisição para deletar um mês."
+					},
+					"response": []
+				}
+			],
+			"description": "Requisições do endpoint da entidade Mês",
 			"protocolProfileBehavior": {}
 		}
 	],
