@@ -29,10 +29,12 @@ public class Movimentacao extends Dinheiro {
 	@Column(name = "data_criacao")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date dataCriacao;
-	@Column(name = "mes")
-	private int mes;
 	@Column(name = "ano")
 	private int ano;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "mes_id", nullable = false)
+	@JsonIgnore
+	private Mes mes;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "categoria_id", nullable = false)
 	@JsonIgnore
@@ -43,6 +45,7 @@ public class Movimentacao extends Dinheiro {
 	private Usuario usuario;
 	@Column(name = "positiva")
 	private boolean positiva;
+	
 	
 	public Long getId() {
 		return id;
@@ -56,10 +59,10 @@ public class Movimentacao extends Dinheiro {
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-	public int getMes() {
+	public Mes getMes() {
 		return mes;
 	}
-	public void setMes(int mes) {
+	public void setMes(Mes mes) {
 		this.mes = mes;
 	}
 	public int getAno() {

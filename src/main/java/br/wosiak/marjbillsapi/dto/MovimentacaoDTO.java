@@ -3,6 +3,7 @@ package br.wosiak.marjbillsapi.dto;
 import java.util.Date;
 
 import br.wosiak.marjbillsapi.model.Categoria;
+import br.wosiak.marjbillsapi.model.Mes;
 import br.wosiak.marjbillsapi.model.Usuario;
 
 public class MovimentacaoDTO {
@@ -12,7 +13,7 @@ public class MovimentacaoDTO {
 	private double valor;
 	private boolean fixo;
 	private Date dataCriacao;
-	private int mes;
+	private Mes mes;
 	private int ano;
 	private Categoria categoria;
 	private Usuario usuario;
@@ -48,10 +49,10 @@ public class MovimentacaoDTO {
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-	public int getMes() {
+	public Mes getMes() {
 		return mes;
 	}
-	public void setMes(int mes) {
+	public void setMes(Mes mes) {
 		this.mes = mes;
 	}
 	public int getAno() {
