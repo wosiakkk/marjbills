@@ -581,7 +581,7 @@
 									"",
 									"pm.test(\"Verificando mês Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.mes).to.eql(1);",
+									"    pm.expect(jsonData.mes.id).to.eql(3);",
 									"});",
 									"",
 									"pm.test(\"Verificando ano Movimentação\", function () {",
@@ -649,7 +649,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Test Postman\",\n\t\"valor\":\"55.88\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":{\"id\":\"1\"},\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"},\n\t\"positiva\":false\n}",
+							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Test Postman\",\n\t\"valor\":\"55.88\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":{\"id\":\"3\"},\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"},\n\t\"positiva\":false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -695,7 +695,7 @@
 									"",
 									"pm.test(\"Verificando mês Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.mes).to.eql(1);",
+									"    pm.expect(jsonData.mes.id).to.eql(3);",
 									"});",
 									"",
 									"pm.test(\"Verificando ano Movimentação\", function () {",
@@ -842,7 +842,7 @@
 									"",
 									"pm.test(\"Verificando mês Movimentação\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.mes).to.eql(2);",
+									"    pm.expect(jsonData.mes.id).to.eql(3);",
 									"});",
 									"",
 									"pm.test(\"Verificando ano Movimentação\", function () {",
@@ -910,7 +910,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\":\"{{idGastCreated}}\",\n\t\"descricao\":\"Compra Test Postman Update\",\n\t\"valor\":\"88.00\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":\"2\",\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"1\"},\n\t\"usuario\": {\"id\":\"2\"},\n\t\"positiva\":true\n}",
+							"raw": "{\n\t\"id\":\"{{idGastCreated}}\",\n\t\"descricao\":\"Compra Test Postman Update\",\n\t\"valor\":\"88.00\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":{\"id\":\"3\"},\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"1\"},\n\t\"usuario\": {\"id\":\"2\"},\n\t\"positiva\":true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1288,6 +1288,39 @@
 			"item": [
 				{
 					"name": "5.1 Criando Mês",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "33b52ab2-4755-4c78-8e26-d251a78f6bf7",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idMesCreated = jsonData.id;",
+									"",
+									"postman.setEnvironmentVariable(\"idMesCreated\", idMesCreated);",
+									"",
+									"pm.test(\"Verificando data Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data).to.have.string(\"2020-\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando id usuário Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1319,16 +1352,44 @@
 				},
 				{
 					"name": "5.2 Buscar Mês (ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b26e144b-2b1d-4dc4-8979-2c6fdc9ec01b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando data Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data).to.have.string(\"2020\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando id usuário Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{uri_marjbills_api}}mes/1",
+							"raw": "{{uri_marjbills_api}}mes/{{idMesCreated}}",
 							"host": [
 								"{{uri_marjbills_api}}mes"
 							],
 							"path": [
-								"1"
+								"{{idMesCreated}}"
 							]
 						},
 						"description": "Requisição para buscar um mês específico"
@@ -1337,16 +1398,35 @@
 				},
 				{
 					"name": "5.3 Listar Meses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "10f5527c-cd1f-4863-b3c1-072b4cc36001",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"A resposta é um array array\", function () {",
+									"        pm.expect(pm.response.json()).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{uri_marjbills_api}}mes/",
+							"raw": "{{uri_marjbills_api}}mes",
 							"host": [
 								"{{uri_marjbills_api}}mes"
-							],
-							"path": [
-								""
 							]
 						},
 						"description": "Requisição para buscar todos os meses."
@@ -1355,6 +1435,34 @@
 				},
 				{
 					"name": "5.4 Atualizar Mês",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bf328223-3c93-480e-919b-7430a433fc0a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando data Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data).to.have.string(\"2020-\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando id usuário Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -1367,7 +1475,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\":\"1\",\n\t\"data\":\"{{currentDate}}\",\n\t\"usuario\":{\"id\":\"1\"},\n\t\"movimentacoes\": [\n\t\t{\"id\":\"5\"}\n\t]\n}",
+							"raw": "{\n\t\"id\":\"1\",\n\t\"data\":\"{{currentDate}}\",\n\t\"usuario\":{\"id\":\"1\"}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1375,12 +1483,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{uri_marjbills_api}}mes/",
+							"raw": "{{uri_marjbills_api}}mes",
 							"host": [
 								"{{uri_marjbills_api}}mes"
-							],
-							"path": [
-								""
 							]
 						},
 						"description": "Requisição para atualizar Mês"
@@ -1389,16 +1494,33 @@
 				},
 				{
 					"name": "5.5 Deletar um Mês",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "417c81c0-1262-4c9a-b083-dcdbcac903bb",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{uri_marjbills_api}}mes/1",
+							"raw": "{{uri_marjbills_api}}mes/{{idMesCreated}}",
 							"host": [
 								"{{uri_marjbills_api}}mes"
 							],
 							"path": [
-								"1"
+								"{{idMesCreated}}"
 							]
 						},
 						"description": "Requisição para deletar um mês."
