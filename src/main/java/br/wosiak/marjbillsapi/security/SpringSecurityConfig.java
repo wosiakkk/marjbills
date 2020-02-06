@@ -17,16 +17,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().authorizeRequests().anyRequest().permitAll();
+		http.cors().and().csrf().disable();
 			
 	}
-	
 	
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-		configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://localhost:8080"));
+		configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
