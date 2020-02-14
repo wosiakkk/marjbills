@@ -9,6 +9,7 @@ import br.wosiak.marjbillsapi.model.Usuario;
 public class MesDTO {
 	private Long id;
 	private Date data;
+	private String nome;
 	private Usuario usuario;
 	private List<Movimentacao> movimentacoes;
 	
@@ -20,6 +21,12 @@ public class MesDTO {
 	}
 	public Date getData() {
 		return data;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	public void setData(Date data) {
 		this.data = data;

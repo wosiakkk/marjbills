@@ -45,6 +45,9 @@ public class Usuario implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	@JsonIgnore
 	private List<Mes> meses;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")
+	@JsonIgnore
+	private List<Controle> controles;
 	
 	public Long getId() {
 		return id;
@@ -93,6 +96,12 @@ public class Usuario implements Serializable{
 	}
 	public void setMeses(List<Mes> meses) {
 		this.meses = meses;
+	}
+	public List<Controle> getControles() {
+		return controles;
+	}
+	public void setControles(List<Controle> controles) {
+		this.controles = controles;
 	}
 	
 	@Override

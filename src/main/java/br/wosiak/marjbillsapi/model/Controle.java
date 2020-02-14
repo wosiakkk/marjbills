@@ -1,10 +1,8 @@
 package br.wosiak.marjbillsapi.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,34 +15,28 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "t_mes")
-public class Mes implements Serializable{
+@Table(name = "t_controle")
+public class Controle implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@SequenceGenerator(name = "seq_mes",sequenceName = "seq_mes",allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_mes")
+	@SequenceGenerator(name = "seq_controle", sequenceName = "seq_controle", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_controle")
 	private Long id;
-	@Column(name = "data")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM")
-	private Date data;
-	@Column(name = "nome")
-	private String nome;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@Column(name = "ano")
+	private Long ano;
+	@Column(name = "descricao")
+	private String descricao;
+	@ManyToOne
 	@JoinColumn(name = "usuario_id", nullable = false)
 	private Usuario usuario;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "mes", orphanRemoval = true, cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "controle")
 	@JsonIgnore
-	private List<Movimentacao> movimentacoes;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "controle_id", nullable = false)
-	private Controle controle;
-	
+	private List<Mes> meses;
 	
 	public Long getId() {
 		return id;
@@ -52,17 +44,17 @@ public class Mes implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getData() {
-		return data;
+	public Long getAno() {
+		return ano;
 	}
-	public void setData(Date data) {
-		this.data = data;
+	public void setAno(Long ano) {
+		this.ano = ano;
 	}
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	public Usuario getUsuario() {
 		return usuario;
@@ -70,17 +62,11 @@ public class Mes implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public List<Movimentacao> getMovimentacoes() {
-		return movimentacoes;
+	public List<Mes> getMeses() {
+		return meses;
 	}
-	public void setMovimentacoes(List<Movimentacao> movimentacoes) {
-		this.movimentacoes = movimentacoes;
-	}
-	public Controle getControle() {
-		return controle;
-	}
-	public void setControle(Controle controle) {
-		this.controle = controle;
+	public void setMeses(List<Mes> meses) {
+		this.meses = meses;
 	}
 	
 	@Override
@@ -98,7 +84,7 @@ public class Mes implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Mes other = (Mes) obj;
+		Controle other = (Controle) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
