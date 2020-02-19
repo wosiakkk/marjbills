@@ -1,0 +1,1536 @@
+{
+	"info": {
+		"_postman_id": "b82ba0a7-9b03-4beb-b5e2-0084ab3276f3",
+		"name": "Marj Bills",
+		"description": "Coleção do projeto de gestão finânciera da tabela da Marjorie.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1 - Usuário",
+			"item": [
+				{
+					"name": "1.1 Criando Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c0e4060b-ded7-4014-8204-8e1e8a6473f8",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idCreated = jsonData.id;",
+									"",
+									"pm.test(\"Redirect location is correct\", function () {",
+									"   pm.response.to.have.header(\"Location\");",
+									"   pm.response.to.be.header(\"Location\", \"http://localhost:8080/usuario/\"+idCreated);",
+									"});",
+									"",
+									"postman.setEnvironmentVariable(\"idUserCreated\", idCreated);",
+									"",
+									"pm.test(\"Verificando nome Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eql(\"Postman Test\");",
+									"});",
+									"",
+									"pm.test(\"Verificando email Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"postmantest@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando senha Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.senha).to.eql(\"12345\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\":\"Postman Test\",\n\t\"email\": \"postmantest@gmail.com\",\n\t\"senha\":\"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}usuario",
+							"host": [
+								"{{uri_marjbills_api}}usuario"
+							]
+						},
+						"description": "Reqisição de criação de Usuário no sistema"
+					},
+					"response": []
+				},
+				{
+					"name": "1.2 Buscar Usuário (ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "461f2f2a-6b79-46cf-ab7c-9afbc8d99391",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando nome Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eql(\"Postman Test\");",
+									"});",
+									"",
+									"pm.test(\"Verificando email Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"postmantest@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando senha Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.senha).to.eql(\"12345\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}usuario/{{idUserCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}usuario"
+							],
+							"path": [
+								"{{idUserCreated}}"
+							]
+						},
+						"description": "Requisição para buscar um usuário específico por seu ID"
+					},
+					"response": []
+				},
+				{
+					"name": "1.3 Listar Usuários",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bfcc608f-90a1-46e7-b738-2df2c144cebe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"A resposta é um array array\", function () {",
+									"        pm.expect(pm.response.json()).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}usuario",
+							"host": [
+								"{{uri_marjbills_api}}usuario"
+							]
+						},
+						"description": "Requisição para listar todos os usuários"
+					},
+					"response": []
+				},
+				{
+					"name": "1.4 Atualizar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ac5708b6-3edc-4442-a37d-2816bbe0828a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando update nome Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eql(\"Postman Teste Update\");",
+									"});",
+									"",
+									"pm.test(\"Verificando update email Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.email).to.eql(\"postamanupdate@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando update senha Usuário\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.senha).to.eql(\"54321\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"{{idUserCreated}}\",\n\t\"nome\":\"Postman Teste Update\",\n\t\"email\":\"postamanupdate@gmail.com\",\n\t\"senha\":\"54321\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}usuario",
+							"host": [
+								"{{uri_marjbills_api}}usuario"
+							]
+						},
+						"description": "Requisição para atualizar um usuário específico."
+					},
+					"response": []
+				},
+				{
+					"name": "1.5 Deletar um Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb528159-9926-49a4-a3e5-dc11e324ecce",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}usuario/{{idUserCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}usuario"
+							],
+							"path": [
+								"{{idUserCreated}}"
+							]
+						},
+						"description": "Requisição para deletar um usuário específico através do seu ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Requisição para o model Usuário",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "2 - Categoria",
+			"item": [
+				{
+					"name": "2.1 Criando Categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c877e8d6-1913-486d-9c1f-2a74e0120823",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idCreated = jsonData.id;",
+									"",
+									"postman.setEnvironmentVariable(\"idCatCreated\", idCreated);",
+									"",
+									"pm.test(\"Verificando nome Categoria\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Postman Teste\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"descricao\":\"Postman Teste\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}categoria",
+							"host": [
+								"{{uri_marjbills_api}}categoria"
+							]
+						},
+						"description": "Requisição para salvar uma categoria"
+					},
+					"response": []
+				},
+				{
+					"name": "2.2 Buscar Categoria (ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e367297-1493-427b-b9f2-940647827e7c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando nome Categoria\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Postman Teste\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}categoria/{{idCatCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}categoria"
+							],
+							"path": [
+								"{{idCatCreated}}"
+							]
+						},
+						"description": "REquisição para buscar uma categoria específica"
+					},
+					"response": []
+				},
+				{
+					"name": "2.3 Listar Categorias",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5ffeba51-481b-41e2-bcc6-312f5e1b0018",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"A resposta é um array array\", function () {",
+									"        pm.expect(pm.response.json()).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}categoria/",
+							"host": [
+								"{{uri_marjbills_api}}categoria"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Requisição para listar todas as categorias"
+					},
+					"response": []
+				},
+				{
+					"name": "2.4 Atualizar Categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ca83648c-6f3e-4242-a37c-c0061c20e70b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando nome Categoria\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Postman Teste Update\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"{{idCatCreated}}\",\n\t\"descricao\":\"Postman Teste Update\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}categoria",
+							"host": [
+								"{{uri_marjbills_api}}categoria"
+							]
+						},
+						"description": "Requisição para atualizar uma categoria específica"
+					},
+					"response": []
+				},
+				{
+					"name": "2.5 Deletar uma Categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd690b3f-0018-4b2d-a24d-acc89fd9894c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}categoria/{{idCatCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}categoria"
+							],
+							"path": [
+								"{{idCatCreated}}"
+							]
+						},
+						"description": "Requisição para deletar uma categoria específica."
+					},
+					"response": []
+				}
+			],
+			"description": "Requisições do model Categoria",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "3 - Movimentação",
+			"item": [
+				{
+					"name": "3.1 Criando Movimentação",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4fde1ae0-edc8-43e0-8653-f63e8bc59c7d",
+								"exec": [
+									"const dateNow= new Date();",
+									"pm.environment.set('currentDate', dateNow.toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "9e232b4c-97ae-4ee8-a1e2-47b440f07095",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idGastCreated = jsonData.id;",
+									"",
+									"postman.setEnvironmentVariable(\"idGastCreated\", idGastCreated);",
+									"",
+									"pm.test(\"Verificando descrição Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Compra Test Postman\");",
+									"});",
+									"",
+									"pm.test(\"Verificando valor Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.valor).to.eql(55.88);",
+									"});",
+									"",
+									"pm.test(\"Verificando fixo Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.fixo).to.eql(false);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando mês Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.mes.id).to.eql(3);",
+									"});",
+									"",
+									"pm.test(\"Verificando ano Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.ano).to.eql(2020);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria id Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.id).to.eql(2);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria desc Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.descricao).to.eql(\"Material de Limpeza\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario id Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario nome Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.nome).to.eql(\"Bruno Wosiak\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario email Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.email).to.eql(\"brunofwosiak@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario senha Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.senha).to.eql(\"12345\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario saldo Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.saldo).to.eql(0.0);",
+									"});",
+									"",
+									"pm.test(\"Verificando positiva Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.positiva).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Compra Test Postman\",\n\t\"valor\":\"55.88\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":{\"id\":\"3\"},\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"2\"},\n\t\"usuario\": {\"id\":\"1\"},\n\t\"positiva\":false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}movimentacao",
+							"host": [
+								"{{uri_marjbills_api}}movimentacao"
+							]
+						},
+						"description": "Requisição para salvar um gasto."
+					},
+					"response": []
+				},
+				{
+					"name": "3.2 Buscar Movimentação (ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f992589a-03bc-40c8-bf0d-6e53b8e2398a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando descrição Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Compra Test Postman\");",
+									"});",
+									"",
+									"pm.test(\"Verificando valor Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.valor).to.eql(55.88);",
+									"});",
+									"",
+									"pm.test(\"Verificando fixo Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.fixo).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Verificando mês Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.mes.id).to.eql(3);",
+									"});",
+									"",
+									"pm.test(\"Verificando ano Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.ano).to.eql(2020);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria id Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.id).to.eql(2);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria desc Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.descricao).to.eql(\"Material de Limpeza\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario id Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario nome Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.nome).to.eql(\"Bruno Wosiak\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario email Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.email).to.eql(\"brunofwosiak@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario senha Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.senha).to.eql(\"12345\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario saldo Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.saldo).to.eql(0.0);",
+									"});",
+									"",
+									"pm.test(\"Verificando positiva Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.positiva).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}movimentacao/{{idGastCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}movimentacao"
+							],
+							"path": [
+								"{{idGastCreated}}"
+							]
+						},
+						"description": "Requisição para buscar uma Movimentação específica por Id."
+					},
+					"response": []
+				},
+				{
+					"name": "3.3 Listar Movimentações",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "28404fe1-fe93-465f-b77c-7ddabc0178fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"A resposta é um array array\", function () {",
+									"        pm.expect(pm.response.json()).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}movimentacao/",
+							"host": [
+								"{{uri_marjbills_api}}movimentacao"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Requisição para listar todas as Movimentações"
+					},
+					"response": []
+				},
+				{
+					"name": "3.4 Atualizar Movimentacao",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6f534ae-7569-4e4f-b21f-5bda8473bb35",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idGastCreated = jsonData.id;",
+									"",
+									"postman.setEnvironmentVariable(\"idGastCreated\", idGastCreated);",
+									"",
+									"pm.test(\"Verificando descrição Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Compra Test Postman Update\");",
+									"});",
+									"",
+									"pm.test(\"Verificando valor Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.valor).to.eql(88.00);",
+									"});",
+									"",
+									"pm.test(\"Verificando fixo Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.fixo).to.eql(false);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando mês Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.mes.id).to.eql(3);",
+									"});",
+									"",
+									"pm.test(\"Verificando ano Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.ano).to.eql(2020);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria id Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Verificando categoria desc Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.categoria.descricao).to.eql(\"Moradia\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario id Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(2);",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario nome Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.nome).to.eql(\"Marjorie Bozzi Rossi\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario email Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.email).to.eql(\"marjoriebozzi@gmail.com\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario senha Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.senha).to.eql(\"12345\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario saldo Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.saldo).to.eql(0.0);",
+									"});",
+									"",
+									"pm.test(\"Verificando positiva Movimentação\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.positiva).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"{{idGastCreated}}\",\n\t\"descricao\":\"Compra Test Postman Update\",\n\t\"valor\":\"88.00\",\n\t\"fixo\": false,\n\t\"dataCriacao\":\"{{currentDate}}\" ,\n\t\"mes\":{\"id\":\"3\"},\n\t\"ano\":\"2020\",\n\t\"categoria\": {\"id\":\"1\"},\n\t\"usuario\": {\"id\":\"2\"},\n\t\"positiva\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}movimentacao",
+							"host": [
+								"{{uri_marjbills_api}}movimentacao"
+							]
+						},
+						"description": "Requisição para atualizar uma Moviemntacao"
+					},
+					"response": []
+				},
+				{
+					"name": "3.5 Deletar uma Movimentação",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "24653b48-cd4f-41a7-b881-78b2aba38360",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}movimentacao/{{idGastCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}movimentacao"
+							],
+							"path": [
+								"{{idGastCreated}}"
+							]
+						},
+						"description": "Requisição para deletar um Gasto"
+					},
+					"response": []
+				}
+			],
+			"description": "Requisições para testar os endpoints de Gasto",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "4 - Objetivo",
+			"item": [
+				{
+					"name": "4.1 Criando Objetivo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6858c307-56fc-466e-96a1-368352be7a8e",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idObjCreated = jsonData.id;",
+									"",
+									"postman.setEnvironmentVariable(\"idObjCreated\", idObjCreated);",
+									"",
+									"pm.test(\"Verificando descrição Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Objetivo Teste Postman\");",
+									"});",
+									"",
+									"pm.test(\"Verificando valor Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.valor).to.eql(150.00);",
+									"});",
+									"",
+									"pm.test(\"Verificando sucesso Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(false);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando dataInicio Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.dataInicio).to.have.string(\"2020-01-20T\");",
+									"});",
+									"",
+									"pm.test(\"Verificando dataFim Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.dataFim).to.have.string(\"2020-02-20T\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario id Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"\",\n\t\"descricao\":\"Objetivo Teste Postman\",\n\t\"valor\":\"150.00\",\n\t\"sucesso\":false,\n\t\"dataInicio\":\"2020-01-20T23:49:04.115Z\",\n\t\"dataFim\":\"2020-02-20T23:49:04.115Z\",\n\t\"usuario\": {\"id\":\"1\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}objetivo",
+							"host": [
+								"{{uri_marjbills_api}}objetivo"
+							]
+						},
+						"description": "Requisição para criar um Objetivo."
+					},
+					"response": []
+				},
+				{
+					"name": "4.2 Buscar Objetivo (ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "159e0d5f-6856-4f6e-874f-b8ce56bbfbc6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idObjCreated = jsonData.id;",
+									"",
+									"pm.test(\"Verificando descrição Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Objetivo Teste Postman\");",
+									"});",
+									"",
+									"pm.test(\"Verificando valor Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.valor).to.eql(150.00);",
+									"});",
+									"",
+									"pm.test(\"Verificando sucesso Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(false);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando dataInicio Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.dataInicio).to.have.string(\"2020-01-20T\");",
+									"});",
+									"",
+									"pm.test(\"Verificando dataFim Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.dataFim).to.have.string(\"2020-02-20T\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario id Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}objetivo/{{idObjCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}objetivo"
+							],
+							"path": [
+								"{{idObjCreated}}"
+							]
+						},
+						"description": "Requisição para bsucar um Objetivo específico"
+					},
+					"response": []
+				},
+				{
+					"name": "4.3 Listar Objetivos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aa6da929-378a-43b5-acb1-aa02d3a50697",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"A resposta é um array array\", function () {",
+									"        pm.expect(pm.response.json()).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}objetivo",
+							"host": [
+								"{{uri_marjbills_api}}objetivo"
+							]
+						},
+						"description": "Requisição para listar Objetivos"
+					},
+					"response": []
+				},
+				{
+					"name": "4.4 Atualizar um Objetivo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2990869a-e83b-4af5-897d-3e5e162827ee",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idObjCreated = jsonData.id;",
+									"",
+									"",
+									"pm.test(\"Verificando descrição Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.descricao).to.eql(\"Objetivo Teste Postman Update\");",
+									"});",
+									"",
+									"pm.test(\"Verificando valor Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.valor).to.eql(155.00);",
+									"});",
+									"",
+									"pm.test(\"Verificando sucesso Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(false);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando dataInicio Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.dataInicio).to.have.string(\"2020-01-25T\");",
+									"});",
+									"",
+									"pm.test(\"Verificando dataFim Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.dataFim).to.have.string(\"2020-02-25T\");",
+									"});",
+									"",
+									"pm.test(\"Verificando usuario id Objetivo\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"{{idObjCreated}}\",\n\t\"descricao\":\"Objetivo Teste Postman Update\",\n\t\"valor\":\"155.00\",\n\t\"sucesso\":false,\n\t\"dataInicio\":\"2020-01-25T23:49:04.115Z\",\n\t\"dataFim\":\"2020-02-25T23:49:04.115Z\",\n\t\"usuario\": {\"id\":\"1\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}objetivo",
+							"host": [
+								"{{uri_marjbills_api}}objetivo"
+							]
+						},
+						"description": "Requisição para atualizar um Objetivo"
+					},
+					"response": []
+				},
+				{
+					"name": "4.5 Deletar um Objetivo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "00312611-50bc-4325-ae9f-caf62ae71276",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}objetivo/{{idObjCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}objetivo"
+							],
+							"path": [
+								"{{idObjCreated}}"
+							]
+						},
+						"description": "Requisição para deletar um Objetivo específico"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "5 - Mês",
+			"item": [
+				{
+					"name": "5.1 Criando Mês",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "33b52ab2-4755-4c78-8e26-d251a78f6bf7",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"var idMesCreated = jsonData.id;",
+									"",
+									"postman.setEnvironmentVariable(\"idMesCreated\", idMesCreated);",
+									"",
+									"pm.test(\"Verificando data Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data).to.have.string(\"2020-\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando id usuário Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"\",\n\t\"data\":\"{{currentDate}}\",\n\t\"usuario\":{\"id\":\"1\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}mes",
+							"host": [
+								"{{uri_marjbills_api}}mes"
+							]
+						},
+						"description": "Requisição para criar um Mês"
+					},
+					"response": []
+				},
+				{
+					"name": "5.2 Buscar Mês (ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b26e144b-2b1d-4dc4-8979-2c6fdc9ec01b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando data Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data).to.have.string(\"2020\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando id usuário Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}mes/{{idMesCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}mes"
+							],
+							"path": [
+								"{{idMesCreated}}"
+							]
+						},
+						"description": "Requisição para buscar um mês específico"
+					},
+					"response": []
+				},
+				{
+					"name": "5.3 Listar Meses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "10f5527c-cd1f-4863-b3c1-072b4cc36001",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"A resposta é um array array\", function () {",
+									"        pm.expect(pm.response.json()).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}mes",
+							"host": [
+								"{{uri_marjbills_api}}mes"
+							]
+						},
+						"description": "Requisição para buscar todos os meses."
+					},
+					"response": []
+				},
+				{
+					"name": "5.4 Atualizar Mês",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bf328223-3c93-480e-919b-7430a433fc0a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificando data Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data).to.have.string(\"2020-\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verificando id usuário Mês\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.usuario.id).to.eql(1);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"1\",\n\t\"data\":\"{{currentDate}}\",\n\t\"usuario\":{\"id\":\"1\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri_marjbills_api}}mes",
+							"host": [
+								"{{uri_marjbills_api}}mes"
+							]
+						},
+						"description": "Requisição para atualizar Mês"
+					},
+					"response": []
+				},
+				{
+					"name": "5.5 Deletar um Mês",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "417c81c0-1262-4c9a-b083-dcdbcac903bb",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{uri_marjbills_api}}mes/{{idMesCreated}}",
+							"host": [
+								"{{uri_marjbills_api}}mes"
+							],
+							"path": [
+								"{{idMesCreated}}"
+							]
+						},
+						"description": "Requisição para deletar um mês."
+					},
+					"response": []
+				}
+			],
+			"description": "Requisições do endpoint da entidade Mês",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
